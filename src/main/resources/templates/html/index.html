@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <title>纵横小说网首页</title>
+    <link rel="icon" href="" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/indexa.css}">
+    <style type="text/css"></style>
+</head>
+<body>
+<div id="mymodal" class="modal fade bs-examlpe-modal-sm"><!-- modal固定布局，上下左右都是0表示充满全屏，支持移动设备上使用触摸方式进行滚动。。-->
+    <div class="modal-dialog modal-sm"><!-- modal-dialog默认相对定位，自适应宽度，大于768px时宽度600，居中-->
+        <div class="modal-content"><!-- modal-content模态框的边框、边距、背景色、阴影效果。-->
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">登录纵横账号</h4>
+            </div>
+            <div class="media-body">
+                <form id="loginForm" th:action="@{/fiction/login}" method="post" th:method="post">
+                    <span id="errorMsg" style="display: none;color: red;">登录失败，用户名或密码错误!</span>
+                    <div class="col-md-10 col-md-offset-1 myMP">
+                        <input id="username" class="form-control" name="username" type="text" placeholder="手机/邮箱/用户名"/><span id="login"></span>
+                    </div>
+                    <div class="col-md-10 col-md-offset-1 myMP">
+                        <input id="password"class="form-control" type="password" name="password" placeholder="密码"/><span id="login2"></span>
+                    </div>
+                    <div class="col-md-10 col-md-offset-1 myMP">
+                        <input type="checkbox" />下次自动登录
+                    </div>
+                    <div class="col-md-10 col-md-offset-7 register">
+                        <a href="register.html">注册账号</a>
+                    </div>
+                    <div class="col-md-12 myB">
+                        <input class="btn btn-primary form-control" type="submit" id="login02" value="登录"/>
+                    </div>
+                    <input type="hidden"
+                           name="${_csrf.parameterName}"
+                           value="${_csrf.token}"/>
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+     <!--头部-->
+    <header class="header-fixed-top">
+    <div id="header1">
+        <a href="#"><img class="picimg1" src="../images/index/logo.png" alt=""></a>
+        <img id="picimg3" src="../images/index/定位.png" alt=""> <span id="city"></span><span id="ip"></span>
+    <div id="header2" class="input-group">
+        <input type="text" class="form-control" placeholder="傲气如我">
+        <span class="input-group-btn">
+            <button class="btn btn-primary" type="button">搜索</button>
+        </span>
+    </div>
+        <ul class="text-right" sec:authorize="!isAuthenticated()">
+            <li><a class="" href="#" data-toggle="modal" data-target="#mymodal">登录  |</a></li>
+            <li><a href="#">注册</a></li>
+        </ul>
+        <ul class="text-right" sec:authorize="isAuthenticated()" style="margin-right:80px">
+            <li><span>欢迎你,</span><span sec:authentication="name"></span><span sec:authentication="principal.authorities"></span></li>
+            <li><a href="#">注销</a></li>
+            <li><a href="#" sec:authorize="hasAnyAuthority('role3')">书籍管理</a></li>
+        </ul>
+        <a href="#"><img id="picimg2" src="../images/index/time.png" alt=""></a>
+    </div>
+    <nav class="text-center mynav" style="display: none">
+        <ul class="">
+            <li class="" id="actives">
+                    <i class="glyphicon glyphicon-th-list"></i>&nbsp;全部分类
+                <div id="activediv" style="display: none">
+                    <dl>
+                        <dd><a href="#">现代言情</a></dd>
+                        <dd><a href="#">古代言情</a></dd>
+                        <dd><a href="#">浪漫青春</a></dd>
+                        <dd><a href="#">玄幻言情</a></dd>
+                        <dd><a href="#">仙侠奇缘</a></dd>
+                        <dd><a href="#">悬疑灵异</a></dd>
+                        <dd><a href="#">科幻空间</a></dd>
+                        <dd><a href="#">游戏竞技</a></dd>
+                        <dd><a href="#">短篇小说</a></dd>
+                        <dd><a href="#">N元次</a></dd>
+                    </dl>
+                </div>
+            </li >
+            <li><a href="#">排行榜</a></li>
+            <li><a href="#">免费</a></li>
+            <li><a href="#">完本</a></li>
+            <li><a href="#">古言</a></li>
+            <li><a href="#">现言</a></li>
+            <li><a href="#">玄幻仙侠</a></li>
+            <li><a href="#">灵异科幻</a></li>
+            <li><a href="#">青春游戏</a></li>
+            <li><a href="#">风尚阁</a></li>
+            <li><a href="#">N元次</a></li>
+            <li><a href="#"><i class="glyphicon glyphicon-jpy"></i>充值</a></li >
+            <li><a href="#">作家专区</a></li>
+        </ul>
+    </nav>
+</header>
+    <!--中部-->
+    <div id="section">
+    <section id="section1">
+    <div class="container" id="conterleft">
+        <div class="row">
+                <div id="mycarousel" class="carousel slide"data-ride="carousel">
+                    <!--图片容器-->
+                    <div id="mycarouse" class="carousel-inner">
+                        <div class="item active">
+                            <a href="#"><img class="itemimg" src="../images/index/Wheelplanting2.jpg" alt=""></a>
+                        </div>
+                        <div class="item">
+                            <a href="#"><img class="itemimg" src="../images/index/Wheelplanting4.jpg" alt=""></a>
+                        </div>
+                        <div class="item">
+                            <a href="#"><img class="itemimg" src="../images/index/Wheelplanting5.jpg" alt=""></a>
+                        </div>
+                        <div class="item">
+                            <a href="#"><img class="itemimg" src="../images/index/Wheelplanting6.jpg" alt=""></a>
+                        </div>
+                        <div class="item">
+                            <a href="#"><img class="itemimg" src="../images/index/Wheelplanting7.jpg" alt=""></a>
+                        </div>
+                    </div>
+                    <ol class="carousel-indicators">
+                        <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#mycarousel" data-slide-to="1"></li>
+                        <li data-target="#mycarousel" data-slide-to="2"></li>
+                        <li data-target="#mycarousel" data-slide-to="3"></li>
+                        <li data-target="#mycarousel" data-slide-to="4"></li>
+                    </ol>
+                    <!--左右控制按钮-->
+                    <a class="left carousel-control" href="#mycarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#mycarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+         </div>
+    </div>
+      <div id="conterright">
+            <h4>公告</h4>
+          <img src="../images/index/20190411134431.png" alt="">
+          <div class="hrs"></div>
+          <div id="dome">
+              <div class="dome1">
+                  <ul id="express">
+                      <li>
+                          <a href="#">[公告] 纵横作家福利</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="#">[公告] 围观吉祥夜新书！</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="#">[活动] 最赞本章说</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="#">[公告] 七英俊——山海之灰</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="#">[公告] 纵横首届全球征文大赛</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="#">[公告] 白饭如霜——傲气如我</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="#">[公告] 山河盛宴</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="#">[公告] 乔先生的黑月光</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="#">[公告] 盛宠之嫡女医妃</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="#">[公告] 神殿霸宠：妖妃欠收拾</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="#">[公告] 穿越之傻王哑妃</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="#">[公告] 学霸娇妻：陆少宠上瘾</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="">[公告] 快穿来袭：狐妖大人要升仙</a>
+                          <div class="hrs2"></div>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+</section>
+        <!--逻辑强推-->
+        <div id="conterleftbotton">
+            <div class="conterleftbotton">
+                <h4>逻辑强推</h4>
+                <div class="hrs3"></div>
+                <div class="Stronglogicpush">
+                    <a href="#"><img class="pushpicimg" th:src="@{/images/image/__${bookinformation[0].getImagepath()}__}" alt=""></a>
+                    <div class="Stronglogicpush2">
+                        <a class="Stronglogicpusha" href="#" th:text="${bookinformation[0].getBookname()}"></a>
+                        <p th:utext="${bookinformation[0].getSynopsis()}"></p>
+                        <img src="../images/index/user.png" alt="">
+                        <span th:text="${bookinformation[0].getAuthod()}">hhh</span>
+                        <div class="xaindai" th:text="${bookinformation[0].getType()}">
+                        </div>
+                    </div>
+                </div>
+                <div class="Stronglogicpush" style="float: right;position: relative;top: -120px">
+                    <a href="#"><img class="pushpicimg" th:src="@{/images/image/__${bookinformation[1].getImagepath()}__}" alt=""></a>
+                    <div class="Stronglogicpush2">
+                        <a class="Stronglogicpusha" href="#" th:text="${bookinformation[1].getBookname()}"></a>
+                        <p th:utext="${bookinformation[1].getSynopsis()}"></p>
+                        <img src="../images/index/user.png" alt="">
+                        <span th:text="${bookinformation[1].getAuthod()}"></span>
+                        <div class="xaindai" th:text="${bookinformation[1].getType()}">
+                        </div>
+                    </div>
+                </div>
+                <div class="Stronglogicpush" style="float:right;position: relative;top: -120px;right: 21px ">
+                    <a href="#"><img class="pushpicimg" th:src="@{/images/image/__${bookinformation[2].getImagepath()}__}" alt=""></a>
+                    <div class="Stronglogicpush2">
+                        <a class="Stronglogicpusha" href="#" th:text="${bookinformation[2].getBookname()}"></a>
+                        <p th:utext="${bookinformation[2].getSynopsis()}"></p>
+                        <img src="../images/index/user.png" alt="">
+                        <span th:text="${bookinformation[2].getAuthod()}"></span>
+                        <div class="xaindai" th:text="${bookinformation[2].getType()}">
+                        </div>
+                    </div>
+                </div>
+                <div class="Stronglogicpush">
+                    <a href="#"><img class="pushpicimg" th:src="@{/images/image/__${bookinformation[3].getImagepath()}__}" alt=""></a>
+                    <div class="Stronglogicpush2">
+                        <a class="Stronglogicpusha" href="#" th:text="${bookinformation[3].getBookname()}"></a>
+                        <p th:utext="${bookinformation[3].getSynopsis()}"></p>
+                        <img src="../images/index/user.png" alt="">
+                        <span th:text="${bookinformation[3].getAuthod()}">hhh</span>
+                        <div class="xaindai" th:text="${bookinformation[3].getType()}">
+                        </div>
+                    </div>
+                </div>
+                <div class="Stronglogicpush" style="float: right;position: relative;top: -120px">
+                    <a href="#"><img class="pushpicimg" th:src="@{/images/image/__${bookinformation[4].getImagepath()}__}" alt=""></a>
+                    <div class="Stronglogicpush2">
+                        <a class="Stronglogicpusha" href="#" th:text="${bookinformation[4].getBookname()}"></a>
+                        <p th:utext="${bookinformation[4].getSynopsis()}"></p>
+                        <img src="../images/index/user.png" alt="">
+                        <span th:text="${bookinformation[4].getAuthod()}"></span>
+                        <div class="xaindai" th:text="${bookinformation[4].getType()}">
+                        </div>
+                    </div>
+                </div>
+                <div class="Stronglogicpush" style="float:right;position: relative;top: -120px;right: 21px ">
+                    <a href="#"><img class="pushpicimg" th:src="@{/images/image/__${bookinformation[5].getImagepath()}__}" alt=""></a>
+                    <div class="Stronglogicpush2">
+                        <a class="Stronglogicpusha" href="#" th:text="${bookinformation[5].getBookname()}"></a>
+                        <p th:utext="${bookinformation[5].getSynopsis()}"></p>
+                        <img src="../images/index/user.png" alt="">
+                        <span th:text="${bookinformation[5].getAuthod()}"></span>
+                        <div class="xaindai" th:text="${bookinformation[5].getType()}">
+                        </div>
+                    </div>
+                </div>
+                <div class="Stronglogicpush">
+                    <a href="#"><img class="pushpicimg" th:src="@{/images/image/__${bookinformation[6].getImagepath()}__}" alt=""></a>
+                    <div class="Stronglogicpush2">
+                        <a class="Stronglogicpusha" href="#" th:text="${bookinformation[6].getBookname()}"></a>
+                        <p th:utext="${bookinformation[6].getSynopsis()}"></p>
+                        <img src="../images/index/user.png" alt="">
+                        <span th:text="${bookinformation[6].getAuthod()}">hhh</span>
+                        <div class="xaindai" th:text="${bookinformation[6].getType()}">
+                        </div>
+                    </div>
+                </div>
+                <div class="Stronglogicpush" style="float: right;position: relative;top: -120px">
+                    <a href="#"><img class="pushpicimg" th:src="@{/images/image/__${bookinformation[7].getImagepath()}__}" alt=""></a>
+                    <div class="Stronglogicpush2">
+                        <a class="Stronglogicpusha" href="#" th:text="${bookinformation[7].getBookname()}"></a>
+                        <p th:utext="${bookinformation[7].getSynopsis()}"></p>
+                        <img src="../images/index/user.png" alt="">
+                        <span th:text="${bookinformation[7].getAuthod()}"></span>
+                        <div class="xaindai" th:text="${bookinformation[7].getType()}">
+                        </div>
+                    </div>
+                </div>
+                <div class="Stronglogicpush" style="float:right;position: relative;top: -120px;right: 21px ">
+                    <a href="#"><img class="pushpicimg" th:src="@{/images/image/__${bookinformation[8].getImagepath()}__}" alt=""></a>
+                    <div class="Stronglogicpush2">
+                        <a class="Stronglogicpusha" href="#" th:text="${bookinformation[8].getBookname()}"></a>
+                        <p th:utext="${bookinformation[8].getSynopsis()}"></p>
+                        <img src="../images/index/user.png" alt="">
+                        <span th:text="${bookinformation[8].getAuthod()}"></span>
+                        <div class="xaindai" th:text="${bookinformation[8].getType()}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <!--风尚阁-->
+    <div id="conterright2">
+        <h4>风尚阁</h4>
+        <img src="../images/index/20190412093234.png" alt="">
+        <div class="hrs"></div>
+        <div id="dome2">
+            <div class="dome1">
+                <ul id="express2">
+                    <li><a href="#">「现代言情」芬芳满堂</a><div class="hrs2"></div></li>
+                    <li><a href="#">「现代言情」遇见翟先生!</a><div class="hrs2"></div></li>
+                    <li><a href="#">「现代言情」温先生，撩表心意</a><div class="hrs2"></div></li>
+                    <li><a href="#">「现代言情」当他在暖冬之时</a><div class="hrs2"></div></li>
+                    <li><a href="#">「现代言情」你是我的大女主</a><div class="hrs2"></div></li>
+                    <li><a href="#">「古代言情」长公主八卦日报</a><div class="hrs2"></div></li>
+                    <li><a href="#">「玄幻言情」帝色撩人</a><div class="hrs2"></div></li>
+                    <li><a href="#">「古代言情」闺月长营</a><div class="hrs2"></div></li>
+                    <li><a href="#">「现代言情」路漫漫，偏南</a><div class="hrs2"></div></li>
+                    <li><a href="#">「现代言情」影帝撩妻请矜持</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+     <!--一品红文-->
+    <div id="Poinsettia">
+      <img class=" rounded img-rounded" src="../images/index/hongwenguan.png" title="红文馆" alt="">
+     <div class="container">
+         <div class="row">
+             <div id="mycarousels" class="carousels slide"data-ride="carousels">
+                 <!--图片容器-->
+                 <div class="carousel-inner">
+                     <div class="item active">
+                        <div class="itemactivediv">
+                            <a href="#"><img src="../images/index/img2.jpg" alt=""></a>
+                            <p><a href="#">你是我戒不掉的心动</a></p>
+                            <span>程龙飞</span>
+                        </div>
+                         <div class="itemactivediv">
+                             <a href="#"><img src="../images/index/img2.jpg" alt=""></a>
+                             <p><a href="#">你是我戒不掉的心动</a></p>
+                             <span>程龙飞</span>
+                         </div>
+                         <div class="itemactivediv">
+                             <a href="#"><img src="../images/index/img2.jpg" alt=""></a>
+                             <p><a href="#">你是我戒不掉的心动</a></p>
+                             <span>程龙飞</span>
+                         </div>
+                         <div class="itemactivediv">
+                             <a href="#"><img src="../images/index/img2.jpg" alt=""></a>
+                             <p><a href="#">你是我戒不掉的心动</a></p>
+                             <span>程龙飞</span>
+                         </div>
+                         <div class="itemactivediv">
+                             <a href="#"><img src="../images/index/img2.jpg" alt=""></a>
+                             <p><a href="#">你是我戒不掉的心动</a></p>
+                             <span>程龙飞</span>
+                         </div>
+                     </div>
+                     <div class="item">
+                         <div class="itemactivediv">
+                             <a href="#"><img src="../images/index/img2.jpg" alt=""></a>
+                             <p><a href="#">你是我戒不掉的心动</a></p>
+                             <span>程龙飞</span>
+                         </div>
+                         <div class="itemactivediv">
+                             <a href="#"><img src="../images/index/img2.jpg" alt=""></a>
+                             <p><a href="#">你是我戒不掉的心动</a></p>
+                             <span>程龙飞</span>
+                         </div>
+                         <div class="itemactivediv">
+                             <a href="#"><img src="../images/index/img2.jpg" alt=""></a>
+                             <p><a href="#">你是我戒不掉的心动</a></p>
+                             <span>程龙飞</span>
+                         </div>
+                         <div class="itemactivediv">
+                             <a href="#"><img src="../images/index/img2.jpg" alt=""></a>
+                             <p><a href="#">你是我戒不掉的心动</a></p>
+                             <span>程龙飞</span>
+                         </div>
+                         <div class="itemactivediv">
+                             <a href="#"><img src="../images/index/img2.jpg" alt=""></a>
+                             <p><a href="#">你是我戒不掉的心动</a></p>
+                             <span>程龙飞</span>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+    <!--中间长图-->
+    <a class="wxs" href="#"><img src="../images/index/wenxainsheng.jpg" alt=""></a>
+    <!--限时免费-->
+    <div id="Limitedtimefree">
+        <div class="div1">
+            <h3>限时免费</h3>
+            <p>VIP章节免费读</p>
+            <img src="../images/index/daojishi.png" alt="">
+            <h4><span class="joind">3</span> 天<span class="joinh"> 7</span>:<span class="joinm">46</span>:<span class="joins">25</span></h4>
+            <a href="#">进入限免频道></a>
+        </div>
+        <div class="div2">
+            <a href="#"><img src="../images/index/img1.jpg" alt=""></a>
+            <p><a href="#">别靠近，我家某某超凶的</a></p>
+            <div class="Freereading">
+            <a href="#">免费阅读</a>
+            </div>
+        </div>
+        <div class="div2">
+            <a href="#"><img src="../images/index/img1.jpg" alt=""></a>
+            <p><a href="#">别靠近，我家某某超凶的</a></p>
+            <div class="Freereading">
+                <a href="#">免费阅读</a>
+            </div>
+        </div>
+        <div class="div2">
+            <a href="#"><img src="../images/index/img1.jpg" alt=""></a>
+            <p><a href="#">别靠近，我家某某超凶的</a></p>
+            <div class="Freereading">
+                <a href="#">免费阅读</a>
+            </div>
+        </div>
+        <div class="div2">
+            <a href="#"><img src="../images/index/img1.jpg" alt=""></a>
+            <p><a href="#">别靠近，我家某某超凶的</a></p>
+            <div class="Freereading">
+                <a href="#">免费阅读</a>
+            </div>
+        </div>
+    </div>
+<!--最近更新-->
+    <div id="Recentupdates">
+        <div id="Recentupdates2">
+            <h4>最近更新</h4>
+            <div class="hrs3"></div>
+            <table border="">
+                <tr>
+                    <td>「耽美小说」<a href="#">凶残王爷求放过13245678</a></td>
+                    <td><a href="#">第一百零一章：泪洒勤政殿，真假无 <img src="" alt=""></a></td>
+                    <td>墨宇公子</td>
+                    <td>04-16&nbsp;12:00</td>
+                </tr>
+                <tr>
+                    <td>「耽美小说」<a href="#">凶残王爷求放过13245678</a></td>
+                    <td><a href="#">第一百零一章：泪洒勤政殿，真假无 <img src="" alt=""></a></td>
+                    <td>墨宇公子</td>
+                    <td>04-16&nbsp;12:00</td>
+                </tr>
+                <tr>
+                    <td>「耽美小说」<a href="#">凶残王爷求放过13245678</a></td>
+                    <td><a href="#">第一百零一章：泪洒勤政殿，真假无 <img src="" alt=""></a></td>
+                    <td>墨宇公子</td>
+                    <td>04-16&nbsp;12:00</td>
+                </tr>
+                <tr>
+                    <td>「耽美小说」<a href="#">凶残王爷求放过13245678</a></td>
+                    <td><a href="#">第一百零一章：泪洒勤政殿，真假无 <img src="" alt=""></a></td>
+                    <td>墨宇公子</td>
+                    <td>04-16&nbsp;12:00</td>
+                </tr>
+                <tr>
+                    <td>「耽美小说」<a href="#">凶残王爷求放过13245678</a></td>
+                    <td><a href="#">第一百零一章：泪洒勤政殿，真假无 <img src="" alt=""></a></td>
+                    <td>墨宇公子</td>
+                    <td>04-16&nbsp;12:00</td>
+                </tr>
+                <tr>
+                    <td>「耽美小说」<a href="#">凶残王爷求放过13245678</a></td>
+                    <td><a href="#">第一百零一章：泪洒勤政殿，真假无 <img src="" alt=""></a></td>
+                    <td>墨宇公子</td>
+                    <td>04-16&nbsp;12:00</td>
+                </tr>
+                <tr>
+                    <td>「耽美小说」<a href="#">凶残王爷求放过13245678</a></td>
+                    <td><a href="#">第一百零一章：泪洒勤政殿，真假无 <img src="" alt=""></a></td>
+                    <td>墨宇公子</td>
+                    <td>04-16&nbsp;12:00</td>
+                </tr>
+                <tr>
+                    <td>「耽美小说」<a href="#">凶残王爷求放过13245678</a></td>
+                    <td><a href="#">第一百零一章：泪洒勤政殿，真假无 <img src="" alt=""></a></td>
+                    <td>墨宇公子</td>
+                    <td>04-16&nbsp;12:00</td>
+                </tr>
+                <tr>
+                    <td>「耽美小说」<a href="#">凶残王爷求放过13245678</a></td>
+                    <td><a href="#">第一百零一章：泪洒勤政殿，真假无 <img src="" alt=""></a></td>
+                    <td>墨宇公子</td>
+                    <td>04-16&nbsp;12:00</td>
+                </tr>
+                <tr>
+                    <td>「耽美小说」<a href="#">凶残王爷求放过13245678</a></td>
+                    <td><a href="#">第一百零一章：泪洒勤政殿，真假无 <img src="" alt=""></a></td>
+                    <td>墨宇公子</td>
+                    <td>04-16&nbsp;12:00</td>
+                </tr>
+                <tr>
+                    <td>「耽美小说」<a href="#">凶残王爷求放过13245678</a></td>
+                    <td><a href="#">第一百零一章：泪洒勤政殿，真假无 <img src="" alt=""></a></td>
+                    <td>墨宇公子</td>
+                    <td>04-16&nbsp;12:00</td>
+                </tr>
+                <tr>
+                    <td>「耽美小说」<a href="#">凶残王爷求放过13245678</a></td>
+                    <td><a href="#">第一百零一章：泪洒勤政殿，真假无 <img src="" alt=""></a></td>
+                    <td>墨宇公子</td>
+                    <td>04-16&nbsp;12:00</td>
+                </tr>
+                <tr>
+                    <td>「耽美小说」<a href="#">凶残王爷求放过13245678</a></td>
+                    <td><a href="#">第一百零一章：泪洒勤政殿，真假无 <img src="" alt=""></a></td>
+                    <td>墨宇公子</td>
+                    <td>04-16&nbsp;12:00</td>
+                </tr>
+                <tr>
+                    <td>「耽美小说」<a href="#">凶残王爷求放过13245678</a></td>
+                    <td><a href="#">第一百零一章：泪洒勤政殿，真假无 <img src="" alt=""></a></td>
+                    <td>墨宇公子</td>
+                    <td>04-16&nbsp;12:00</td>
+                </tr>
+                <tr>
+                    <td>「耽美小说」<a href="#">凶残王爷求放过13245678</a></td>
+                    <td><a href="#">第一百零一章：泪洒勤政殿，真假无 <img src="" alt=""></a></td>
+                    <td>墨宇公子</td>
+                    <td>04-16&nbsp;12:00</td>
+                </tr>
+                <tr>
+                    <td>「耽美小说」<a href="#">凶残王爷求放过13245678</a></td>
+                    <td><a href="#">第一百零一章：泪洒勤政殿，真假无 <img src="" alt=""></a></td>
+                    <td>墨宇公子</td>
+                    <td>04-16&nbsp;12:00</td>
+                </tr>
+           </table>
+        </div>
+        <!--收藏榜-->
+        <div class="Collectionlist">
+            <h4>收藏榜</h4>
+            <div class="hrs3"></div>
+            <div class="NO1">NO.1</div>
+            <a href="#"><img src="../images/index/shoucang.jpg" alt=""></a>
+            <a class="NO1A" href="#">裴太太，你已婚!</a>
+            <span><a href="#">婚恋情缘</a> · 6526 收藏</span>
+            <div class="dome2">
+            <ul class="Collectionlistul">
+                <li><a href="#"></a><div class="hrs2"></div></li>
+                <li><a href="#">芬芳满堂</a><div class="hrs2"></div> <span></span></li>
+                <li><a href="#">遇见翟先生!</a><div class="hrs2"></div></li>
+                <li><a href="#">温先生，撩表心意</a><div class="hrs2"></div></li>
+                <li><a href="#">当他在暖冬之时</a><div class="hrs2"></div></li>
+                <li><a href="#">你是我的大女主</a><div class="hrs2"></div></li>
+                <li><a href="#">长公主八卦日报</a></li>
+            </ul>
+            </div>
+            <ul class="ul2">
+                <li><div class="li2">2</div></li>
+                <li><div class="li3">3</div></li>
+                <li><div class="li4">4</div></li>
+                <li><div class="li5">5</div></li>
+                <li><div class="li6">6</div></li>
+                <li><div class="li7">7</div></li>
+            </ul>
+            <h4>公众作品人气榜</h4>
+            <div class="hrs3"></div>
+            <div class="NO1">NO.1</div>
+            <a href="#"><img src="../images/index/shoucang.jpg" alt=""></a>
+            <a class="NO1A" href="#">我和总统结婚了!</a>
+            <span><a href="#">婚恋情缘</a> · 6526 收藏</span>
+            <div class="dome2">
+                <ul class="Collectionlistul">
+                    <li><a href="#"></a><div class="hrs2"></div></li>
+                    <li><a href="#">芬芳满堂</a><div class="hrs2"></div></li>
+                    <li><a href="#">遇见翟先生!</a><div class="hrs2"></div></li>
+                    <li><a href="#">温先生，撩表心意</a><div class="hrs2"></div></li>
+                    <li><a href="#">当他在暖冬之时</a><div class="hrs2"></div></li>
+                    <li><a href="#">你是我的大女主</a><div class="hrs2"></div></li>
+                    <li><a href="#">长公主八卦日报</a></li>
+                </ul>
+            </div>
+            <ul class="ul2">
+                <li><div class="li2">2</div></li>
+                <li><div class="li3">3</div></li>
+                <li><div class="li4">4</div></li>
+                <li><div class="li5">5</div></li>
+                <li><div class="li6">6</div></li>
+                <li><div class="li7">7</div></li>
+            </ul>
+        </div>
+    </div>
+</div>
+     <!--返回顶部-->
+     <a id="Returntothetop" onclick="fx()"><img src="../images/index/返回顶部.png" alt=""></a>
+<!--底部-->
+<div style="width: 100%">
+    <iframe th:replace="html/bottom::html" height="210px" width="100%" frameborder="0" scrolling="0"></iframe>
+</div>
+<script th:src="@{/js/jquery-1.12.4.js}"></script>
+<script th:src='@{/js/bootstrap.min.js}'></script>
+<script th:src="@{http://pv.sohu.com/cityjson}"></script>
+<script>
+    function fx() {
+        var y = $("body, html").scrollTop();
+        var z = 20;
+        if (!(y > 0)) {
+            return;
+        }else {
+            $("body, html").scrollTop((y - z));
+        }
+        setTimeout(fx, 1);
+    }
+$(function(){
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+
+    $("form").submit(function() {
+        $("#errorMsg").hide();
+        var result = false;
+        var username = $("#username").val();
+        var login = $('#login');
+        var nsmereguser = /^[a-zA-Z][a-zA-Z0-9]{4,6}$/;
+        if (username == "") {
+            login.html("请填写用户名！");
+            return false;
+        }
+        //密码判断
+        var password = $("#password").val();
+        var login2 = $('#login2');
+        var regpwd = /^[a-zA-Z0-9]{6,10}$/;
+        if (password == "") {
+            login2.html('请填写密码！');
+            return false;
+        }
+        $.ajax({
+            type : "post",
+            url : "/fiction/login",
+            async : true,
+            data : {username:username, password:password},
+            dataType: "text",
+            success: function (data) {
+                if (data == "登录失败"){
+                    $("#errorMsg").show();
+                }else{
+                    window.location.replace("/fiction/doindex");
+                }
+            },error:function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("报错！"+textStatus)
+            }
+        });
+        return result;
+    });
+    $('.mynav').slideDown(1000);
+//    鼠标移至导航栏时显示下拉框
+   $('#actives').mouseenter(function(){
+       $("#activediv").slideDown(500);
+   })
+    $('#actives').mouseleave(function(){
+        $("#activediv").slideUp(500);
+    })
+//    图片轮播
+    $(".carousel").carousel({
+        interval:2000
+    })
+    $(".carousels").carousel({
+        interval:3000
+    })
+        //公告滑动
+    var marginTop = 0;
+    var interval = setInterval(function () {
+        $("#express").children("li").first().animate({"margin-top": marginTop--}, 0, function () {
+            var $first = $(this);
+            if (!$first.is(":animated")) {
+                if ((-marginTop) > $first.height()) {
+                    $first.css({"margin-top": 0}).appendTo($("#express"));
+                    marginTop = 0;
+                }
+            }
+        });
+    },180);
+    // 获取当前IP地址
+    $('#city').html(returnCitySN["cityp"]);
+    //获取城市ajax
+    $.ajax({
+        url: 'http://api.map.baidu.com/location/ip?ak=ia6HfFL660Bvh43exmH9LrI6',
+        type: 'POST',
+        dataType: 'jsonp',
+        success:function(data) {
+            $('#city').html( data.content.address_detail.city)
+        }
+    });
+//倒计时
+    var setTimer = null;
+    var chazhi = 0;
+    //差值计算
+    //例子(模拟)
+    chazhi = 135 * 86400000;
+    //真实时间(注意月份需减掉1，否则时间会计算错误)
+    //chazhi = (new Date(year,month-1,day,hour,minute,second)) - (new Date()); //计算剩余的毫秒数
+    //chazhi = (new Date(2018,8-1,6,6,6,6)) - (new Date());
+
+    //执行函数部分
+    countFunc(chazhi);
+    setTimer = setInterval(function() {
+        chazhi = chazhi - 1000;
+        countFunc(chazhi);
+    }, 1000);
+    function countFunc(leftTime) {
+        if(leftTime >= 0) {
+            var days = parseInt(leftTime / 1000 / 60 / 60 / 24, 2); //计算剩余的天数
+            var hours = parseInt(leftTime / 1000 / 60 / 60 % 24, 10); //计算剩余的小时
+            var minutes = parseInt(leftTime / 1000 / 60 % 60, 10); //计算剩余的分钟
+            var seconds = parseInt(leftTime / 1000 % 60, 10); //计算剩余的秒数
+            days = checkTime(days);
+            hours = checkTime(hours);
+            minutes = checkTime(minutes);
+            seconds = checkTime(seconds);
+            $(".joind").html(days);
+            $(".joinh").html(hours);
+            $(".joinm").html(minutes);
+            $(".joins").html(seconds);
+        } else {
+            clearInterval(setTimer);
+            $(".joind").html("00");
+            $(".joinh").html("00");
+            $(".joinm").html("00");
+            $(".joins").html("00");
+        }
+    }
+    function checkTime(i) { //将0-9的数字前面加上0，例1变为01
+        if(i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+})
+</script>
+</body>
+</html>

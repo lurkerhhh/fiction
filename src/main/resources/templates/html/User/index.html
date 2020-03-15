@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>纵横小说网首页</title>
+    <link rel="icon" href="" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <style type="text/css">
+        /*获取IP地址*/
+        #city{
+            margin-left: 1px;
+            color: #5e5e5e;
+            font-size: 13px;
+        }
+        #picimg3{
+            width: 13px;
+            height: 15px;
+            margin-left: 20px;
+            margin-top: -4px;
+        }
+        #section1{
+            width:70% ;
+            height: 305px;
+            border: 1px solid rgba(220, 210, 255, 0.5);
+            margin: auto;
+            border-radius: 8px;
+            background-color: white;
+            margin-top: 15px;
+        }
+        #conterleft{
+            width: 72%;
+            height: 270px;
+            border: 1px solid rgba(255, 0, 0, 0);
+           margin-top: 18px;
+            margin-right: 278px;
+        }
+        /*轮播图*/
+       #mycarouse img{
+           height: 267px;
+           width: 910px;
+       }
+        .carousel-indicators li{
+            background-color: rgba(222, 79, 139, 0.97);
+            border:  1px solid rgba(229, 90, 136, 0.91);
+            border-radius: 10px;
+        }
+        .carousel-indicators .active{
+            width: 11px;
+            height: 11px;
+            margin: 0;
+            border:  2px solid rgba(65, 56, 255, 0);
+        }
+            /*公告div*/
+        #conterright{
+            width: 240px;
+            height: 270px;
+            border: 1px transparent;
+            float: right;
+            margin-top: -270px;
+            margin-right: 20px;
+        }
+        /*横线*/
+        .hrs{
+            border-bottom: 1px solid rgba(7, 7, 7, 0.99);
+            margin-top: -22px;
+        }
+        .hrs2{
+            border-bottom: 1px solid rgba(179, 179, 179, 0.84);
+            width: 100%;
+        }
+        /*公告动画*/
+        #conterright img{
+            width: 37px;
+            margin-left: 195px;
+            margin-top: -60px;
+            transition: all 2s;
+        }
+        #conterright:hover img{
+            transform: translate(-20px);
+        }
+        #dome{
+            overflow:hidden; /*溢出的部分不显示*/
+            height:230px;
+            padding:5px;
+        }
+        .dome1 ul li{
+            margin-left: -40px;
+            line-height: 35px;
+        }
+        .dome1 ul li a{
+            color: #5e5e5e;
+            font-size: 13.5px;
+        }
+        .dome1 ul li a:hover{
+            color:rgba(255, 43, 78, 0.76);
+            text-decoration: none;
+        }
+        /*编辑强推*/
+        #conterleftbotton{
+            width: 70%;
+            border: 1px solid rgba(179, 179, 179, 0.3);
+            margin: auto;
+            height: 460px;
+            margin-top: 15px;
+            border-radius: 8px;
+            background-color: white;
+        }
+        #conterleftbotton h4{
+            font-weight: bolder;
+        }
+        .conterleftbotton{
+            width: 73%;
+            margin-top: 15px;
+            margin-left: 17px;
+        }
+        .hrs3{
+            border-bottom: 1px solid rgba(7, 7, 7, 0.99);
+        }
+        .picimages{
+            width: 72px;
+            height: 92px;
+            position: relative;
+            right: 70px;
+            transition: all 0.5s ease-in-out;
+        }
+         .thumbnail img:hover{
+             transform:scale(1.05) rotate(0deg);
+         }
+        .caption{
+            margin-left: 74px;
+            margin-top: -105px;
+        }
+        .caption .captiona{
+            color: rgba(35, 31, 32, 0.79);
+            font-size: 14px;
+            font-weight:bolder;
+        }
+        .caption .captiona:hover{
+            color: rgba(222, 79, 139, 0.78);
+            text-decoration: none;
+        }
+        .caption p{
+            font-size: 11px;
+            line-height: 20px;
+        }
+        .caption img{
+            width: 14px;
+            height: 14px;
+        }
+        .caption span{
+            font-size: 12px;
+            color: #5e5e5e;
+        }
+        .caption i{
+            border: 1px solid rgba(105, 105, 105, 0.48);
+            font-size: 12px;
+            margin-left: 15px;
+        }
+        .thumbnail{
+            margin-top: 10px;
+            margin-left: -10px;
+        }
+
+        #conterright2{
+            width: 245px;
+            border: 1px transparent;
+            float: right;
+            margin-top: -316px;
+            margin-right: 17px;
+        }
+        #conterright2 img{
+            width: 37px;
+            margin-left: 200px;
+            margin-top: -65px;
+            transition: all 2s;
+        }
+        #conterright2:hover img{
+            transform: translate(-20px);
+        }
+        .media-body{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<!--头部-->
+<header>
+    <div id="header1">
+        <a href=""><img class="picimg1" src="../images/header/logo.png" alt=""></a>
+        <img id="picimg3" src="../images/index/定位.png" alt=""> <span id="city"></span><span id="ip"></span>
+    <div id="header2" class="input-group">
+        <input type="text" class="form-control" placeholder="傲气如我">
+        <span class="input-group-btn">
+            <button class="btn btn-primary" type="button">搜索</button>
+        </span>
+    </div>
+        <ul class="text-right" th:if="${bookuser==null}">
+            <li><a href="#" data-toggle="modal" data-target="#mymodal">登录  |</a></li>
+            <li><a href="#">注册</a></li>
+        </ul>
+        <div id="mymodal" class="modal fade bs-example-modal-sm">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="media-body">
+                    <p>用户名: <input type="text" name="username"></p>
+                    <p>密码: <input type="text" name="password"></p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary">登录</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        <ul class="text-right" th:if="${bookuser!=null}">
+            <li><a href="#">欢迎你，[[${bookuser.getUsername()}]]</a></li>
+            <li><a href="#">注册</a></li>
+        </ul>
+        <a href="#"><img id="picimg2" src="../images/header/time.png" alt=""></a>
+    </div>
+</header>
+    <nav class="text-center">
+        <ul class="myNav ">
+            <li class="active" id="actives">
+                    <i class="glyphicon glyphicon-th-list"></i>&nbsp;全部分类
+                <div id="activediv" style="display: none">
+                    <dl>
+                        <dd><a href="">现代言情</a></dd>
+                        <dd><a href="">古代言情</a></dd>
+                        <dd><a href="">浪漫青春</a></dd>
+                        <dd><a href="">玄幻言情</a></dd>
+                        <dd><a href="">仙侠奇缘</a></dd>
+                        <dd><a href="">悬疑灵异</a></dd>
+                        <dd><a href="">科幻空间</a></dd>
+                        <dd><a href="">游戏竞技</a></dd>
+                        <dd><a href="">短篇小说</a></dd>
+                        <dd><a href="">N元次</a></dd>
+                    </dl>
+                </div>
+            </li >
+            <li>
+                <a class="intercept" href="#">
+                    排行榜
+                </a>
+            </li>
+            <li>
+                <a class="intercept" href="#">
+                    免费
+                </a>
+            </li>
+            <li class="hidden-sm">
+                <a class="intercept" href="#">
+                    完本
+                </a>
+            </li>
+            <li class="hidden-sm">
+                <a class="intercept" href="#">
+                   古言
+                </a>
+            </li>
+            <li class="hidden-sm">
+                <a class="intercept" href="#">
+                    现言
+                </a>
+            </li>
+            <li class="hidden-sm">
+                <a class="intercept" href="#">
+                    玄幻仙侠
+                </a>
+            </li>
+            <li class="hidden-sm">
+                <a class="intercept" href="#">
+                     灵异科幻
+                </a>
+            </li>
+            <li class="hidden-sm">
+                <a class="intercept" href="#">
+                    青春游戏
+                </a>
+            </li>
+            <li class="hidden-sm">
+                <a class="intercept" href="#">
+                     风尚阁
+                </a>
+            </li>
+            <li class=" hidden-md hidden-sm">
+                <a class="intercept" href="#">
+                    N元次
+                </a>
+            </li>
+            <li class="active">
+                <a class="intercept" href="#">
+                    <i class="glyphicon glyphicon-jpy"></i>&nbsp;充值
+                </a>
+            </li >
+            <li class=" hidden-md hidden-sm">
+                <a class="intercept" href="#">
+                    作家专区
+                </a>
+            </li>
+        </ul>
+    </nav>
+<!--中部-->
+<section id="section1">
+    <div class="container" id="conterleft">
+        <div class="row">
+                <div id="mycarousel" class="carousel slide"data-ride="carousel">
+                    <!--图片容器-->
+                    <div id="mycarouse" class="carousel-inner">
+                        <div class="item active">
+                            <a href=""><img class="itemimg" src="../images/index/Wheelplanting2.jpg" alt=""></a>
+                        </div>
+                        <div class="item">
+                            <a href=""><img class="itemimg" src="../images/index/Wheelplanting4.jpg" alt=""></a>
+                        </div>
+                        <div class="item">
+                            <a href=""><img class="itemimg" src="../images/index/Wheelplanting5.jpg" alt=""></a>
+                        </div>
+                        <div class="item">
+                            <a href=""><img class="itemimg" src="../images/index/Wheelplanting6.jpg" alt=""></a>
+                        </div>
+                    </div>
+                    <ol class="carousel-indicators">
+                        <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#mycarousel" data-slide-to="1"></li>
+                        <li data-target="#mycarousel" data-slide-to="2"></li>
+                        <li data-target="#mycarousel" data-slide-to="3"></li>
+                    </ol>
+                    <!--左右控制按钮-->
+                    <a class="left carousel-control" href="#mycarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#mycarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+         </div>
+    </div>
+      <div id="conterright">
+            <h4>公告</h4>
+          <img src="../images/index/20190411134431.png" alt="">
+          <div class="hrs"></div>
+          <div id="dome">
+              <div class="dome1">
+                  <ul id="express">
+                      <li>
+                          <a href="">[公告] 纵横作家福利</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="">[公告] 围观吉祥夜新书！</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="">[活动] 最赞本章说</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="">[公告] 七英俊——山海之灰</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="">[公告] 纵横首届全球征文大赛</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="">[公告] 白饭如霜——傲气如我</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="">[公告] 山河盛宴</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="">[公告] 乔先生的黑月光</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="">[公告] 盛宠之嫡女医妃</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="">[公告] 神殿霸宠：妖妃欠收拾</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="">[公告] 穿越之傻王哑妃</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="">[公告] 学霸娇妻：陆少宠上瘾</a>
+                          <div class="hrs2"></div>
+                      </li>
+                      <li>
+                          <a href="">[公告] 快穿来袭：狐妖大人要升仙</a>
+                          <div class="hrs2"></div>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+</section>
+
+<div id="conterleftbotton">
+    <div class="conterleftbotton">
+        <h4>逻辑强推</h4>
+        <div class="hrs3"></div>
+        <div class="col-xs-12 col-md-12">
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-xs-6">
+                    <div class="thumbnail">
+                        <a href=""><img class="picimages" th:src="@{/images/image/__${bookinformation[0].getImagepath()}__}" alt=""></a>
+                        <div class="caption">
+                            <a href="" class="captiona" th:text="${bookinformation[0].getBookname()}"></a>
+                            <p th:utext="${bookinformation[0].getSynopsis()}"></p>
+                            <img src="../images/index/user.png" alt="">
+                            <span th:text="${bookinformation[0].getAuthod()}"></span>
+                            <i th:text="${bookinformation[0].getType()}"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-xs-6">
+                    <div class="thumbnail">
+                        <a href=""><img class="picimages" th:src="@{/images/image/__${bookinformation[1].getImagepath()}__}" alt=""></a>
+                        <div class="caption">
+                            <a href="" class="captiona" th:text="${bookinformation[1].getBookname()}"></a>
+                            <p th:utext="${bookinformation[1].getSynopsis()}"></p>
+                            <img src="../images/index/user.png" alt="">
+                            <span th:text="${bookinformation[1].getAuthod()}"></span>
+                            <i th:text="${bookinformation[1].getType()}"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-xs-6">
+                    <div class="thumbnail">
+                        <a href=""><img class="picimages" th:src="@{/images/image/__${bookinformation[2].getImagepath()}__}" alt=""></a>
+                        <div class="caption">
+                            <a href="" class="captiona" th:text="${bookinformation[2].getBookname()}"></a>
+                            <p th:utext="${bookinformation[2].getSynopsis()}"></p>
+                            <img src="../images/index/user.png" alt="">
+                            <span th:text="${bookinformation[2].getAuthod()}"></span>
+                            <i th:text="${bookinformation[2].getType()}"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-12">
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-xs-6">
+                    <div class="thumbnail">
+                        <a href=""><img class="picimages" th:src="@{/images/image/__${bookinformation[3].getImagepath()}__}" alt=""></a>
+                        <div class="caption">
+                            <a href="" class="captiona" th:text="${bookinformation[3].getBookname()}"></a>
+                            <p th:utext="${bookinformation[3].getSynopsis()}"></p>
+                            <img src="../images/index/user.png" alt="">
+                            <span th:text="${bookinformation[3].getAuthod()}"></span>
+                            <i th:text="${bookinformation[3].getType()}"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-xs-6">
+                    <div class="thumbnail">
+                        <a href=""><img class="picimages" th:src="@{/images/image/__${bookinformation[4].getImagepath()}__}" alt=""></a>
+                        <div class="caption">
+                            <a href="" class="captiona" th:text="${bookinformation[4].getBookname()}"></a>
+                            <p th:utext="${bookinformation[4].getSynopsis()}"></p>
+                            <img src="../images/index/user.png" alt="">
+                            <span th:text="${bookinformation[4].getAuthod()}"></span>
+                            <i th:text="${bookinformation[4].getType()}"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-xs-6">
+                    <div class="thumbnail">
+                        <a href=""><img class="picimages" th:src="@{/images/image/__${bookinformation[5].getImagepath()}__}" alt=""></a>
+                        <div class="caption">
+                            <a href="" class="captiona" th:text="${bookinformation[5].getBookname()}"></a>
+                            <p th:utext="${bookinformation[5].getSynopsis()}"></p>
+                            <img src="../images/index/user.png" alt="">
+                            <span th:text="${bookinformation[5].getAuthod()}"></span>
+                            <i th:text="${bookinformation[5].getType()}"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-12">
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-xs-6">
+                    <div class="thumbnail">
+                        <a href=""><img class="picimages" th:src="@{/images/image/__${bookinformation[6].getImagepath()}__}" alt=""></a>
+                        <div class="caption">
+                            <a href="" class="captiona" th:text="${bookinformation[6].getBookname()}"></a>
+                            <p th:utext="${bookinformation[6].getSynopsis()}"></p>
+                            <img src="../images/index/user.png" alt="">
+                            <span th:text="${bookinformation[6].getAuthod()}"></span>
+                            <i th:text="${bookinformation[6].getType()}"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-xs-6">
+                    <div class="thumbnail">
+                        <a href=""><img class="picimages" th:src="@{/images/image/__${bookinformation[7].getImagepath()}__}" alt=""></a>
+                        <div class="caption">
+                            <a href="" class="captiona" th:text="${bookinformation[7].getBookname()}"></a>
+                            <p th:utext="${bookinformation[7].getSynopsis()}"></p>
+                            <img src="../images/index/user.png" alt="">
+                            <span th:text="${bookinformation[7].getAuthod()}"></span>
+                            <i th:text="${bookinformation[7].getType()}"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-xs-6">
+                    <div class="thumbnail">
+                        <a href=""><img class="picimages" th:src="@{/images/image/__${bookinformation[8].getImagepath()}__}" alt=""></a>
+                        <div class="caption">
+                            <a href="" class="captiona" th:text="${bookinformation[8].getBookname()}"></a>
+                            <p th:utext="${bookinformation[8].getSynopsis()}"></p>
+                            <img src="../images/index/user.png" alt="">
+                            <span th:text="${bookinformation[8].getAuthod()}"></span>
+                            <i th:text="${bookinformation[8].getType()}"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="conterright2">
+        <h4>风尚阁</h4>
+        <img src="../images/index/20190412093234.png" alt="">
+        <div class="hrs"></div>
+        <div id="dome2">
+            <div class="dome1">
+                <ul id="express2">
+                    <li>
+                        <a href="">「现代言情」芬芳满堂</a>
+                        <div class="hrs2"></div>
+                    </li>
+                    <li>
+                        <a href="">「现代言情」遇见翟先生!</a>
+                        <div class="hrs2"></div>
+                    </li>
+                    <li>
+                        <a href="">「现代言情」温先生，撩表心意</a>
+                        <div class="hrs2"></div>
+                    </li>
+                    <li>
+                        <a href="">「现代言情」当他在暖冬之时</a>
+                        <div class="hrs2"></div>
+                    </li>
+                    <li>
+                        <a href="">「现代言情」你是我的大女主</a>
+                        <div class="hrs2"></div>
+                    </li>
+                    <li>
+                        <a href="">「古代言情」长公主八卦日报</a>
+                        <div class="hrs2"></div>
+                    </li>
+                    <li>
+                        <a href="">「玄幻言情」帝色撩人</a>
+                        <div class="hrs2"></div>
+                    </li>
+                    <li>
+                        <a href="">「古代言情」闺月长营</a>
+                        <div class="hrs2"></div>
+                    </li>
+                    <li>
+                        <a href="">「现代言情」路漫漫，偏南</a>
+                        <div class="hrs2"></div>
+                    </li>
+                    <li>
+                        <a href="">「现代言情」影帝撩妻请矜持</a>
+                        <div class="hrs2"></div>
+                    </li>
+                    <li>
+                        <a href="">「现代言情」苏北有佳人</a>
+
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/jquery-1.12.4.js}"></script>
+<script th:src='@{/js/bootstrap.min.js}'></script>
+<script src="http://pv.sohu.com/cityjson"></script>
+<script>
+    /**
+     * 垂直居中模态框
+     **/
+    function centerModals() {
+        $('#mymodal').each(function(i) {
+            var $clone = $(this).clone().css('display', 'block').appendTo('body');
+            var top = Math.round(($clone.height() - $clone.find('.modal-content').height()) / 2);
+            top = top > 50 ? top : 0;
+            $clone.remove();
+            $(this).find('.modal-content').css("margin-top", top - 50);
+        });
+    }
+    // 在模态框出现的时候调用垂直居中方法
+    $('#mymodal').on('show.bs.modal', centerModals);
+    // 在窗口大小改变的时候调用垂直居中方法
+    $(window).on('resize', centerModals);
+    $(function(){
+   $('#actives').mouseenter(function(){
+       $("#activediv").slideDown(500)
+   })
+    $('#actives').mouseleave(function(){
+        $("#activediv").slideUp(500);
+    })
+    $(".carousel").carousel({
+        interval:2000
+    })
+        //公告滑动
+    var marginTop = 0;
+    var interval = setInterval(function () {
+        $("#express").children("li").first().animate({"margin-top": marginTop--}, 0, function () {
+            var $first = $(this);
+            if (!$first.is(":animated")) {
+                if ((-marginTop) > $first.height()) {
+                    $first.css({"margin-top": 0}).appendTo($("#express"));
+                    marginTop = 0;
+                }
+            }
+        });
+    },180);
+            //    获取IP地址
+    $('#city').html(returnCitySN["cityp"]);
+    //获取城市ajax
+    $.ajax({
+        url: 'http://api.map.baidu.com/location/ip?ak=ia6HfFL660Bvh43exmH9LrI6',
+        type: 'POST',
+        dataType: 'jsonp',
+        success:function(data) {
+            $('#city').html( data.content.address_detail.city)
+        }
+    });
+})
+</script>
+</body>
+</html>

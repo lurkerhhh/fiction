@@ -1,0 +1,27 @@
+# 端口
+server:
+  port: 8080
+
+spring:
+  # 配置数据源
+  datasource:
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/fiction?serverTimezone=UTC
+
+  thymeleaf:
+    cache: false
+  security:
+    user:
+      name: root
+      password: 1234
+logging:
+  level:
+    com.project.fiction.dao: debug
+# mapper文件映射
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.project.fiction.pojo
+
+

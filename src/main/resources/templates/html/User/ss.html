@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p id="city"></p>
+<p id="ip"></p>
+<script src="../js/jquery-1.12.4.js"></script>
+<script src="http://pv.sohu.com/cityjson"></script>
+<script type="text/javascript">
+    $(function() {
+
+        $('#city').html(returnCitySN["cityp"]);
+    //获取城市ajax
+    $.ajax({
+        url: 'http://api.map.baidu.com/location/ip?ak=ia6HfFL660Bvh43exmH9LrI6',
+        type: 'POST',
+        dataType: 'jsonp',
+        success:function(data) {
+            $('#city').html( data.content.address_detail.city)
+        }
+    });
+    })
+    </script>
+</body>
+</html>

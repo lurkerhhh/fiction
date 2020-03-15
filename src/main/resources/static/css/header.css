@@ -1,0 +1,28 @@
+a{text-decoration: none;}
+a:hover{text-decoration: none;}
+body{ padding:0; margin:0;background-color: rgba(206, 132, 131, 0.1);}
+li{ list-style-type: none; }
+.picimg1{width: 165px;  height: 52px;  margin-top: 10px;}
+#header1{width: 1000px;  height: 72px;  border: 1px transparent;  margin: auto;  }
+#header2{width: 37%;  margin: auto;  margin-top: -42px;  }
+#header1 ul li{  display: inline-block;  font-size: 14px;  color: #5e5e5e;  }
+#header1 ul{  margin-right: 120px;  margin-top: -28px;  }
+#header1 ul li a:hover{  color: red;  text-decoration: none;  }
+#header1 #picimg2{  width: 32px;  height: 32px;  float: right;  margin-top: -40px;  margin-right: 40px;  }
+/*导航栏*/
+nav{width: 100%;height: 48px;border: 1px transparent;background:linear-gradient(#ff9fb1, rgba(255, 20, 18, 0.79));color: whitesmoke;}
+nav ul{margin-left: -70px}
+nav ul li{display: inline-block;padding: 13px}
+nav ul li a{color: whitesmoke;font-size: 15px;font-family: 新宋体}
+nav ul li a:hover{color: whitesmoke}
+nav ul li:hover{background-color: red;  cursor: pointer;}
+/*鼠标以上显示*/
+#activediv{  margin-top: 13px;margin-left: -16px;  width: 106px;  border:1px transparent;  background-color: rgba(255, 22, 96, 0.76);
+    position: absolute;
+    z-index:2;  box-shadow: 0px 0px 5px rgba(79, 58, 255, 0.52);  }
+#activediv dl dd{  line-height: 32px;  cursor: pointer;  }
+#activediv dl dd:hover{  background-color:red;  }
+#activediv dl dd a{  color: white;  }
+/*获取IP地址*/
+#city{  margin-left: 1px;  color: #5e5e5e;  font-size: 13px;  }
+#picimg3{  width: 13px;  height: 15px;  margin-left: 20px;  margin-top: -4px;  }

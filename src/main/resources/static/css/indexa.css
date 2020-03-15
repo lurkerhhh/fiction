@@ -1,0 +1,114 @@
+/*中部样式*/
+/*中部大div*/
+#section{  width: 1080px;  height: 2025px;  border: 1px transparent;  margin: auto;  }
+/*轮播图这个大容器*/
+#section1{  width:1070px ;  height: 305px;  border: 1px solid transparent;  margin: auto;  border-radius: 8px;  background-color: white;  margin-top: 12px;  }
+#conterleft{  width: 72%;  height: 270px;  border: 1px solid rgba(255, 0, 0, 0);  margin-top: 18px;  margin-right: 280px;  }
+/*轮播图*/
+#mycarouse img{ height: 267px;  width: 915px;  }
+.carousel-indicators li{  background-color: rgba(222, 79, 139, 0.97);  border:  1px solid rgba(229, 90, 136, 0.91);  border-radius: 10px;  }
+.carousel-indicators .active{  width: 11px;  height: 11px;  margin: 0;  border:  2px solid rgba(65, 56, 255, 0);  }
+/*公告div*/
+#conterright{ width: 240px;  height: 270px;  border: 1px transparent;  float: right;  margin-top: -270px;  margin-right: 20px;  }
+/*横线*/
+.hrs{  border-bottom: 1px solid rgba(7, 7, 7, 0.99);  margin-top: -22px;  }
+.hrs2{  border-bottom: 1px solid rgba(179, 179, 179, 0.84);  width: 100%;  }
+/*公告动画*/
+#conterright img{  width: 37px;  margin-left: 195px;  margin-top: -60px;  transition: all 2s;  }
+#conterright h4{font-weight: bolder;color: #191919  }
+#conterright:hover img{  transform: translate(-20px);  }
+#dome{  overflow:hidden; /*溢出的部分不显示*/  height:230px;  padding:5px;  }
+.dome1 ul li{  margin-left: -40px;  line-height: 35px;  }
+.dome1 ul li a{  color: #5e5e5e;  font-size: 13.5px;  }
+.dome1 ul li a:hover{  color:rgba(255, 43, 78, 0.76);  text-decoration: none;  }
+/*编辑强推*/
+#conterleftbotton{  width:1070px ;  border: 1px solid transparent;  margin: auto;  height: 420px;  margin-top: 12px;  border-radius: 8px;  background-color: white;  }
+h4{  font-weight: bolder;  }
+.conterleftbotton{  border: 1px solid transparent;  width: 775px; height: 410px;  margin-top: 10px;  margin-left: 17px; }
+.hrs3{ border-bottom: 1px solid rgba(7, 7, 7, 0.99);  }
+/*编辑强推里面的小框*/
+.Stronglogicpush{width: 245px;height: 110px;border: 1px transparent;margin-top: 10px;border-radius: 5px;}
+.Stronglogicpush2{width: 155px;height: 110px;border: 1px transparent;position: relative;left: 90px;top: -105px}
+.Stronglogicpush2 p{font-size: 12px;color: rgba(94, 94, 94, 0.73);line-height: 20px }
+.Stronglogicpush2 img{width: 20px;height: 20px;}
+.Stronglogicpush2 span{font-size: 12.5px;color: #5e5e5e}
+/*言情小框*/
+.xaindai{border: 1px solid rgba(35, 31, 32, 0.44);font-size: 12px;margin-left: 100px;margin-top: -20px;width: 50px;color: #5e5e5e}
+.pushpicimg{width: 78px;height: 98px;margin-left: 5px;margin-top: 4px; transition: all 1s;}
+/*作者头像*/
+.pushpicimg:hover{  z-index: 2;transform:scale(1.1)  }
+.Stronglogicpusha{font-size: 16.5px;;color: #222222;line-height: 30px  }
+.Stronglogicpusha:hover{color: red}
+/*风尚阁*/
+#conterright2{  width: 245px;  border: 1px transparent;position: relative;left: 812px;bottom: 407px   }
+#conterright2 img{  width: 37px;  margin-left: 200px;  margin-top: -66px;  transition: all 2s;  }
+#conterright2:hover img{  transform: translate(-20px);  }
+/*一品红文*/
+#Poinsettia{  width: 1065px;  height: 220px;  border: 1px transparent;  margin: auto;  border-radius: 8px;  margin-top: 10px;  background-color: white;  }
+#Poinsettia .rounded{height: 218px}
+.carousels{width: 895px;height: 220px;border: 1px transparent;position: relative;left: 170px;bottom: 220px;background-color: rgba(0, 52, 190, 0.01);}
+.itemactivediv{width: 175px;height: 218px;border: 1px transparent;display: inline-block;background-color: white;margin-top: 2px;border-radius: 3px;transition: all 1s}
+.itemactivediv:hover{ z-index: 1;transform:scale(1.1);box-shadow: 0px 0px 5px rgba(255, 20, 7, 0.94);}
+.itemactivediv img{width: 100px;height: 120px;margin-left: 39px;margin-top: 30px;transition: all 1s}
+.itemactivediv img:hover{  z-index: 2;transform:scale(1.1); }
+.itemactivediv p a{color: #505050;margin-left: 22px;line-height: 30px}
+.itemactivediv p a:hover{color: red}
+.itemactivediv span{color: rgba(0, 0, 0, 0.54);margin-left: 65px;position: relative;top: -12px;font-size: 13px }
+/*中间长图片*/
+.wxs{width: 1047px;margin-left: 8px;position: relative;bottom: -10px;}
+/*限时免费*/
+#Limitedtimefree{width: 1060px;height: 200px;border: 1px transparent;margin: auto;border-radius:5px;margin-top: 25px;background-color: rgba(245, 245, 245, 0.31)  }
+#Limitedtimefree img{margin-left: 55px}
+#Limitedtimefree .div1{width: 173px;height: 199px;border: 1px transparent;display: inline-block;border-radius:2px;background-color: white;position: relative;top: -1px}
+#Limitedtimefree .div2{width: 217px;height: 199px;border: 1px transparent;display: inline-block;border-radius:2px;background-color: white;position: relative;top: -29px;transition: all 1s}
+#Limitedtimefree .div1 h3{color: red;font-weight: bolder;text-align: center}
+#Limitedtimefree .div1 p{font-size: 12px;color: #7e7e7e;text-align: center}
+#Limitedtimefree h4{color: red;text-align: center}
+#Limitedtimefree .div1 a{color: #2aaaec;font-size: 13px;margin-left: 40px;position: relative;top: -8px}
+#Limitedtimefree .div2:hover{box-shadow: 0px 0px 10px rgba(79, 58, 255, 0.52); z-index: 1;transform:scale(1.1);}
+#Limitedtimefree .div2 img{width: 75px;height: 100px;margin-top: 10px;margin-left: 68px;transition: all 1s}
+#Limitedtimefree .div2 img:hover{z-index: 2;transform:scale(1.1);}
+#Limitedtimefree .div2 p{text-align: center;font-size: 15px;margin-top: 10px}
+#Limitedtimefree .div2 p a{color: #262626;font-weight: 500}
+#Limitedtimefree .div2 p a:hover{color: red}
+#Limitedtimefree .Freereading{width: 90px;height: 35px;border: 1px solid rgba(94, 94, 94, 0.25);margin: auto; cursor: pointer;}
+#Limitedtimefree .Freereading:hover{background-color: rgba(255, 80, 140, 0.11);border:1px solid red;  }
+#Limitedtimefree .Freereading a{color: red;margin-left: 12px;font-size:16px;position: relative;top: 6px;font-family: 楷体}
+
+/*最近更新*/
+#Recentupdates{width: 1063px;height: 700px;border: 1px solid rgba(110, 110, 110, 0.13);margin: auto;margin-top: 15px;border-radius:5px;background-color: white }
+#Recentupdates2{width: 780px;height: 680px;border: 1px solid white;margin-left: 10px;margin-top: 10px}
+#Recentupdates2 table {border-right:none;border-left:none;border-bottom:none;border-top:none}
+#Recentupdates2 table tr td{color: #777777;border-right:none;border-left:none }
+#Recentupdates2 table tr td{padding: 10px;text-align: center;color: #929292;font-size: 13.5px}
+#Recentupdates2 table tr td a{color: #5e5e5e}
+#Recentupdates2 table tr td a:hover{color: red}
+#Recentupdates2 table tr td:nth-of-type(2){width:335px}
+/*收藏榜 公众作品人气榜*/
+.Collectionlist{width: 250px;height: 680px;border: 1px transparent;float: right;margin-top: -679px;margin-right: 10px}
+.NO1{border: 1px transparent;width: 35px;height: 18px;color: white;background-color: rgba(255, 22, 97, 0.58) ;margin-top: 12px;font-weight: bolder}
+.Collectionlist img{width: 65px;height: 80px;margin-left: 175px;margin-top: -15px}
+.Collectionlist .NO1A{font-size: 17px;position: relative;top: -60px;color: #262626}
+.Collectionlist span{font-size: 12px;color:  #7e7e7e;position: relative;right: 125px;bottom: 40px}
+.Collectionlist span a{color: #7e7e7e  }
+.Collectionlist a:hover{color: red}
+/*公众作品人气榜*/
+.dome2{width: 250px;height: 203px;border: 1px transparent;margin-top: -17px}
+.dome2 ul li{  margin-left: -10px;  line-height: 32px;color: #5e5e5e }
+.dome2 ul li a{  color: #5e5e5e;  font-size: 13.5px; }
+.dome2 ul li a:hover{  color:rgba(255, 43, 78, 0.76);  text-decoration: none; }
+.ul2{margin-left: -38px;margin-top: -193px;}
+.ul2 li .li2{width: 20px;height: 17px;border: 1px transparent;color: white;background-color: rgba(82, 231, 236, 0.6);text-align: center}
+.ul2 li .li3{width: 20px;height: 17px;border: 1px transparent;color: white;background-color: rgba(97, 236, 102, 0.69);text-align: center;margin-top: 17px}
+.ul2 li .li4{width: 20px;height: 17px;border: 1px transparent;color: white;background-color: rgba(94, 94, 94, 0.29);text-align: center;margin-top: 17px}
+.ul2 li .li5{width: 20px;height: 17px;border: 1px transparent;color: white;background-color: rgba(94, 94, 94, 0.17);text-align: center;margin-top: 16.5px}
+.ul2 li .li6{width: 20px;height: 17px;border: 1px transparent;color: white;background-color: rgba(94, 94, 94, 0.13);text-align: center;margin-top: 16.5px}
+.ul2 li .li7{width: 20px;height: 17px;border: 1px transparent;color: white;background-color: rgba(94, 94, 94, 0.13);text-align: center;margin-top: 16.5px}
+/*返回顶部*/
+#Returntothetop{  position: fixed;  bottom: 8%;  right: 0.1%;  }
+.myMP{  margin: 13px;color: rgba(94, 94, 94, 0.79)  }
+input{line-height: 10px}
+.myB{  margin-bottom: 20px; }
+.register{margin-top: -35px}
+.register a{color: red}
+.media-body span{color: red;}
